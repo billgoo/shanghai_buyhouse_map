@@ -21,8 +21,8 @@
 <script>
 import NewHouseMap from "@/components/NewHouseMap.vue";
 // import staticRes from "@s/index.js";
-import routeMap from "@s/routeMap.json";
-import workPlace from "@s/workPlace.json";
+// import routeMap from "@s/routeMap.json";
+// import workPlace from "@s/workPlace.json";
 
 export default {
   components: { NewHouseMap },
@@ -33,46 +33,46 @@ export default {
       routeName: this.$route.name,
     };
   },
-  created() {
-    // 这两行也是可以引入的
-    // this.routeMap = staticRes.routeMap;
-    // this.workPlace = staticRes.workPlace;
-    this.routeMap = routeMap;
-    this.workPlace = workPlace;
-    // this.$axios
-    //   .get("@s/routeMap.json")
-    //   .then((res) => {
-    //     const json = res.data;
-    //     console.log("read static resources: ", json);
-    //     this.routeMap = json ? Object.assign({}, json) : null;
-    //     for (let key of Object.keys(this.routeMap)) {
-    //       this.routeMap[key].sort(function (a, b) {
-    //         // Compare the 2 ids
-    //         if (a.id < b.id) return -1;
-    //         if (a.id > b.id) return 1;
-    //         return 0;
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log("read static resource index path error:" + err);
-    //   });
-    // this.$axios
-    //   .get("@s/workPlace.json")
-    //   .then((res) => {
-    //     const json = res.data;
-    //     console.log("read static resources: ", json);
-    //     this.workPlace = json.slice();
-    //     this.workPlace.sort(function (a, b) {
-    //       // Compare the 2 ids
-    //       if (a.id < b.id) return -1;
-    //       if (a.id > b.id) return 1;
-    //       return 0;
-    //     });
-    //   })
-    //   .catch((err) => {
-    //     console.log("read static resource index path error:" + err);
-    //   });
+  async created() {
+    // this.routeMap = await staticRes.routeMap();
+    // this.workPlace = await staticRes.workPlace();
+    // 这两行会把数据直接打包进去，不能动态修改
+    // this.routeMap = routeMap;
+    // this.workPlace = workPlace;
+    this.$axios
+      .get("static/routeMap.json")
+      .then((res) => {
+        const json = res.data;
+        console.log("read static resources: ", json);
+        this.routeMap = json ? Object.assign({}, json) : null;
+        for (let key of Object.keys(this.routeMap)) {
+          this.routeMap[key].sort(function (a, b) {
+            // Compare the 2 ids
+            if (a.id < b.id) return -1;
+            if (a.id > b.id) return 1;
+            return 0;
+          });
+        }
+      })
+      .catch((err) => {
+        console.log("read static resource index path error:" + err);
+      });
+    this.$axios
+      .get("static/workPlace.json")
+      .then((res) => {
+        const json = res.data;
+        console.log("read static resources: ", json);
+        this.workPlace = json.slice();
+        this.workPlace.sort(function (a, b) {
+          // Compare the 2 ids
+          if (a.id < b.id) return -1;
+          if (a.id > b.id) return 1;
+          return 0;
+        });
+      })
+      .catch((err) => {
+        console.log("read static resource index path error:" + err);
+      });
   },
   watch: {
     $route(to, from) {
