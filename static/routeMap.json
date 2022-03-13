@@ -2,21 +2,17 @@
     "FirstNew": [
         {
             "id": "1",
-            "name": "四季都会",
+            "name": "四季都会绿龙北",
             "lng1": "121.425937",
             "lat2": "31.395867",
             "price": "4.82",
             "min_price": "500",
             "max_price": "600",
-            "desc": "test desc, test desc, test desc, test desc, test desc, test desc, test desc, test desc, test desc, test desc, test desc, test desc",
+            "desc": "积分：63.1",
             "info": [
                 {
                     "name": "test",
                     "link": "https://www.baidu.com"
-                },
-                {
-                    "name": "test1",
-                    "link": "https://www.qq.com"
                 }
             ]
         }

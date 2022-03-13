@@ -62,7 +62,12 @@
               style="flex: 1"
               :trigger-on-focus="false"
             />
-            <el-button @click="search(true)" :disabled="!query" type="primary">
+            <el-button
+              @click="search(true)"
+              @tap="search(true)"
+              :disabled="!query"
+              type="primary"
+            >
               搜索
             </el-button>
           </el-container>
@@ -72,6 +77,7 @@
             <el-button
               icon="el-icon-back"
               @click="reset"
+              @tap="reset"
               style="margin-right: 6px"
             />
             <span class="count">共 {{ searching ? "..." : total }} 条结果</span>

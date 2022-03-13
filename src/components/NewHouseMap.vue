@@ -50,7 +50,12 @@
               style="flex: 1"
               :trigger-on-focus="false"
             />
-            <el-button @click="search(true)" :disabled="!query" type="primary">
+            <el-button
+              @click="search(true)"
+              @tap="search(true)"
+              :disabled="!query"
+              type="primary"
+            >
               搜索
             </el-button>
           </el-container>
@@ -60,6 +65,7 @@
             <el-button
               icon="el-icon-back"
               @click="resetSearch"
+              @tap="resetSearch"
               style="margin-right: 6px"
             />
             <span class="count">共 {{ searching ? "..." : total }} 条结果</span>
@@ -146,6 +152,7 @@
             icon="el-icon-back"
             plain
             @click="hideNavCard"
+            @tap="hideNavCard"
           />
         </el-col>
         <el-col :span="16">地图导航详情</el-col>
@@ -156,6 +163,7 @@
             icon="el-icon-close"
             plain
             @click="hideNavCard"
+            @tap="hideNavCard"
           />
         </el-col>
       </el-row>
@@ -193,7 +201,7 @@
           ' 万</span>',
         direction: 'bottom',
       }"
-      :z-index="100"
+      :z-index="120"
     >
       <slot>
         <div>
@@ -259,6 +267,7 @@
                       color: blue;
                     "
                     @click="showNavCard(item.poiHouse, item.poiWork, method)"
+                    @tap="showNavCard(item.poiHouse, item.poiWork, method)"
                   >
                     {{ label }}
                   </span>
