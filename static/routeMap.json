@@ -1,0 +1,87 @@
+{
+    "FirstNew": [
+        {
+            "id": "1",
+            "name": "四季都会",
+            "lng1": "121.425937",
+            "lat2": "31.395867",
+            "price": "4.82",
+            "min_price": "500",
+            "max_price": "600",
+            "desc": "test desc, test desc, test desc, test desc, test desc, test desc, test desc, test desc, test desc, test desc, test desc, test desc",
+            "info": [
+                {
+                    "name": "test",
+                    "link": "https://www.baidu.com"
+                },
+                {
+                    "name": "test1",
+                    "link": "https://www.qq.com"
+                }
+            ]
+        },
+        {
+            "id": "2",
+            "name": "静安嘉里中心地下停车场",
+            "lng1": "121.45057",
+            "lat2": "31.223669",
+            "price": "5",
+            "min_price": "500",
+            "max_price": "600",
+            "desc": "test desc, test desc, test desc, test desc, test desc, test desc, test desc, test desc, test desc, test desc, test desc, test desc",
+            "info": [
+                {
+                    "name": "test",
+                    "link": "https://www.baidu.com"
+                }
+            ]
+        },
+        {
+            "id": "3",
+            "name": "人民广场",
+            "lng1": "121.475164",
+            "lat2": "31.228816",
+            "price": "10",
+            "min_price": "500",
+            "max_price": "600",
+            "desc": "test desc 2",
+            "info": [
+                {
+                    "name": "test",
+                    "link": "https://www.baidu.com"
+                }
+            ]
+        }
+    ],
+    "SecondNew": [],
+    "CustomTest": [
+        {
+            "id": "1",
+            "name": "静安嘉里中心地下停车场",
+            "lng1": "121.45057",
+            "lat2": "31.223669",
+            "price": "5 万",
+            "desc": "test desc, test desc, test desc, test desc, test desc, test desc, test desc, test desc, test desc, test desc, test desc, test desc",
+            "info": [
+                {
+                    "name": "test",
+                    "link": "https://www.baidu.com"
+                }
+            ]
+        },
+        {
+            "id": "2",
+            "name": "人民广场",
+            "lng1": "121.475164",
+            "lat2": "31.228816",
+            "price": "10 万",
+            "desc": "test desc 2",
+            "info": [
+                {
+                    "name": "test",
+                    "link": "https://www.baidu.com"
+                }
+            ]
+        }
+    ]
+}
