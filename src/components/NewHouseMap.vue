@@ -202,15 +202,17 @@
         direction: 'bottom',
       }"
       :z-index="120"
+      style="cursor: pointer;"
     >
       <slot>
-        <div>
+        <div style="cursor: pointer;">
           <el-popover
             ref="infoWindow"
             :key="navQueue.length == labelQueue.length"
             placement="top"
             width="210"
             trigger="click"
+            style="cursor: pointer;"
           >
             <el-descriptions size="small" :column="1" :title="poi.name">
               <!-- <template v-slot:extra>
@@ -304,7 +306,7 @@
             <i
               slot="reference"
               class="el-icon-s-home"
-              style="font-size: 26px; color: #00cd00"
+              style="font-size: 26px; color: #00cd00; cursor: pointer;"
             />
           </el-popover>
         </div>

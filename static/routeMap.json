@@ -17,7 +17,24 @@
             ]
         }
     ],
-    "SecondNew": [],
+    "SecondNew": [
+        {
+            "id": "1",
+            "name": "古北悦公馆",
+            "lng1": "121.38872",
+            "lat2": "31.177738",
+            "price": "NaN",
+            "min_price": "NaN",
+            "max_price": "NaN",
+            "desc": "闵行金虹桥<br />建面约120㎡3房、约122㎡3房、约151㎡4房、约153㎡4房。",
+            "info": [
+                {
+                    "name": "户型图：新房摇号-02-03",
+                    "link": "https://mp.weixin.qq.com/s/nd3S-IimmadJwk620_sv-g"
+                }
+            ]
+        }
+    ],
     "CustomTest": [
         {
             "id": "1",

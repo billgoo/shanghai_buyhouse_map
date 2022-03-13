@@ -141,6 +141,18 @@
         </el-footer>
       </el-container>
     </el-card>
+
+    <el-input
+      v-model="this.position"
+      placeholder="请输入内容"
+      readonly
+      :style="{
+        position: 'absolute',
+        right: '10px',
+        top: '10px',
+        width: '280px',
+      }"
+    ></el-input>
   </div>
 </template>
 
@@ -224,6 +236,7 @@ export default {
       this.hover = poi;
       this.position = [poi.location.lng, poi.location.lat];
       this.$map.setCenter([poi.location.lng, poi.location.lat]);
+      console.log("lng/lat:", this.position);
     },
     fitView() {
       requestAnimationFrame(() => {
