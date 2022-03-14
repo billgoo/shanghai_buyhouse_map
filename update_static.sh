@@ -1,3 +1,7 @@
+git add static/
+git commit -m "update static"
+git push -f git@github.com:billgoo/shanghai_buyhouse_map.git main
+
 mkdir dist
 rm -r -f dist/static/
 cp -r static/ dist/static/

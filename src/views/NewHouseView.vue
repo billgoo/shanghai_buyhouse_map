@@ -5,7 +5,7 @@
       :is-hotspot="false"
       :show-indoor-map="false"
       :center="['121.475164', '31.228816']"
-      :zoom="11"
+      :zoom="10.8"
       map-style="amap://styles/normal"
     >
       <NewHouseMap
