@@ -1,5 +1,6 @@
 <template>
   <div class="my-custom-map-component">
+    <!-- 右上工具栏 -->
     <amap-control-bar
       :position="{
         top: '8px',
@@ -26,6 +27,7 @@
       }"
     /> -->
 
+    <!-- 左上搜索框 -->
     <el-card
       v-show="!isNavigation"
       :body-style="{
@@ -129,7 +131,25 @@
         </el-footer>
       </el-container>
     </el-card>
+    <!-- 搜索结果标记 -->
+    <amap-marker
+      ref="multiMarkers"
+      v-for="poi in results"
+      :key="poi.id"
+      :position="[poi.location.lng, poi.location.lat]"
+      :label="{
+        content:
+          poi === hover
+            ? poi.name + '<br/>' + poi.location.lng + ' , ' + poi.location.lat
+            : '',
+        direction: 'bottom',
+      }"
+      :z-index="poi === hover ? 110 : 100"
+      :visible="[null, undefined].includes(hover) || poi === hover"
+      @mouseover="hover = poi"
+    />
 
+    <!-- 左上导航信息栏 -->
     <el-card
       v-show="isNavigation"
       :body-style="{
@@ -170,26 +190,10 @@
       <div ref="navDetailInfo" style="padding: 2px 2px" />
     </el-card>
 
+    <!-- 新房信息标记 -->
     <amap-marker
-      ref="multiMarkers"
-      v-for="poi in results"
-      :key="poi.id"
-      :position="[poi.location.lng, poi.location.lat]"
-      :label="{
-        content:
-          poi === hover
-            ? poi.name + '<br/>' + poi.location.lng + ' , ' + poi.location.lat
-            : '',
-        direction: 'bottom',
-      }"
-      :z-index="poi === hover ? 110 : 100"
-      :visible="[null, undefined].includes(hover) || poi === hover"
-      @mouseover="hover = poi"
-    />
-
-    <amap-marker
-      ref="houseMarkers"
       v-for="(poi, index) in dataArray"
+      ref="houseMarkers"
       :key="index"
       :position="[poi.lng1, poi.lat2]"
       :label="{
@@ -202,116 +206,117 @@
         direction: 'bottom',
       }"
       :z-index="120"
-      style="cursor: pointer;"
+      style="cursor: pointer"
+      clickable
+      topWhenClick
+      @touchstart="openPopover('touchstart', index)"
+      @click="openPopover('click', index)"
     >
       <slot>
-        <div style="cursor: pointer;">
-          <el-popover
-            ref="infoWindow"
-            :key="navQueue.length == labelQueue.length"
-            placement="top"
-            width="210"
-            trigger="click"
-            style="cursor: pointer;"
-          >
-            <el-descriptions size="small" :column="1" :title="poi.name">
-              <!-- <template v-slot:extra>
-                <el-button icon="el-icon-close" size="mini" @click="closePopover" />
-              </template> -->
-              <el-descriptions-item
-                label="均价"
-                labelStyle="word-break: keep-all;"
-              >
-                <span class="my-break-line-span">{{ poi.price + " 万" }}</span>
-              </el-descriptions-item>
-              <el-descriptions-item
-                label="总价"
-                labelStyle="word-break: keep-all;"
-              >
-                <span class="my-break-line-span">{{
-                  poi.min_price + " 万 ~ " + poi.max_price + " 万"
-                }}</span>
-              </el-descriptions-item>
-              <el-descriptions-item
-                label="首付"
-                labelStyle="word-break: keep-all;"
-              >
-                <span class="my-break-line-span">{{
-                  parseInt(poi.min_price) * 0.35 +
-                  " 万 ~ " +
-                  parseInt(poi.max_price) * 0.35 +
-                  " 万"
-                }}</span>
-              </el-descriptions-item>
-              <el-descriptions-item
-                v-for="(item, index) in poi.pathTime"
-                :key="index"
-                :label="item.label"
-                labelStyle="word-break: keep-all;"
-              >
-                <div
-                  v-for="(label, method) in navLabel"
-                  :key="method"
-                  labelStyle="word-break: keep-all;"
-                >
-                  <span
-                    v-if="
-                      ['', null, undefined, '10000元'].includes(item[method]) ||
-                      label == '打车费用'
-                    "
-                    >{{ label }}</span
-                  >
-                  <span
-                    v-else
-                    style="
-                      cursor: pointer;
-                      text-decoration: underline;
-                      color: blue;
-                    "
-                    @click="showNavCard(item.poiHouse, item.poiWork, method)"
-                    @tap="showNavCard(item.poiHouse, item.poiWork, method)"
-                  >
-                    {{ label }}
-                  </span>
-                  {{
-                    " " +
-                    (["", null, undefined, "10000元"].includes(item[method])
-                      ? "未知"
-                      : item[method])
-                  }}
-                </div>
-              </el-descriptions-item>
-              <el-descriptions-item
-                label="描述"
-                labelStyle="word-break: keep-all;"
-              >
-                <span class="my-break-line-span">{{ poi.desc }}</span>
-              </el-descriptions-item>
-              <el-descriptions-item
-                label="相关信息"
-                labelStyle="word-break: keep-all;"
-              >
-                <div v-for="(item, index) in poi.info" :key="index">
-                  <el-link
-                    type="primary"
-                    :href="item.link"
-                    target="_blank"
-                    rel="noreferrer noopener"
-                  >
-                    {{ item.name }}
-                  </el-link>
-                </div>
-              </el-descriptions-item>
-            </el-descriptions>
-            <i
-              slot="reference"
-              class="el-icon-s-home"
-              style="font-size: 26px; color: #00cd00; cursor: pointer;"
-            />
-          </el-popover>
-        </div>
+        <i
+          ref="markerIcon"
+          class="el-icon-s-home"
+          style="font-size: 26px; color: #00cd00; cursor: pointer"
+        />
       </slot>
     </amap-marker>
+    <!-- 新房信息弹窗 -->
+    <template v-for="(poi, index) in dataArray">
+      <el-popover
+        ref="infoWindow"
+        :tabindex="index"
+        :key="`infoWindow${index}`"
+        placement="top"
+        width="210"
+        trigger="click"
+        style="cursor: pointer"
+        :z-index="120"
+        :popper-options="{ boundariesElement: 'viewport' }"
+      >
+        <el-descriptions
+          :key="navQueue.length == labelQueue.length"
+          size="small"
+          :column="1"
+          :title="poi.name"
+        >
+          <template v-slot:extra>
+            <el-button
+              icon="el-icon-close"
+              size="mini"
+              @click="closePopover(index)"
+            />
+          </template>
+          <el-descriptions-item label="均价" labelStyle="word-break: keep-all;">
+            <span class="my-break-line-span">{{ poi.price + " 万" }}</span>
+          </el-descriptions-item>
+          <el-descriptions-item label="总价" labelStyle="word-break: keep-all;">
+            <span class="my-break-line-span">{{
+              poi.min_price + " 万 ~ " + poi.max_price + " 万"
+            }}</span>
+          </el-descriptions-item>
+          <el-descriptions-item label="首付" labelStyle="word-break: keep-all;">
+            <span class="my-break-line-span">{{
+              parseInt(parseInt(poi.min_price) * 0.35) +
+              " 万 ~ " +
+              parseInt(parseInt(poi.max_price) * 0.35) +
+              " 万"
+            }}</span>
+          </el-descriptions-item>
+          <el-descriptions-item
+            v-for="(item_p, index_p) in poi.pathTime"
+            :key="index_p"
+            :label="item_p.label"
+            labelStyle="word-break: keep-all;"
+          >
+            <div
+              v-for="(label, method) in navLabel"
+              :key="method"
+              labelStyle="word-break: keep-all;"
+            >
+              <span
+                v-if="
+                  ['', null, undefined, '10000元'].includes(item_p[method]) ||
+                  label == '打车费用'
+                "
+                >{{ label }}</span
+              >
+              <span
+                v-else
+                style="cursor: pointer; text-decoration: underline; color: blue"
+                @click="showNavCard(item_p.poiHouse, item_p.poiWork, method)"
+                @tap="showNavCard(item_p.poiHouse, item_p.poiWork, method)"
+              >
+                {{ label }}
+              </span>
+              {{
+                " " +
+                (["", null, undefined, "10000元"].includes(item_p[method])
+                  ? "未知"
+                  : item_p[method])
+              }}
+            </div>
+          </el-descriptions-item>
+          <el-descriptions-item label="描述" labelStyle="word-break: keep-all;">
+            <span class="my-break-line-span">{{ poi.desc }}</span>
+          </el-descriptions-item>
+          <el-descriptions-item
+            label="相关信息"
+            labelStyle="word-break: keep-all;"
+          >
+            <div v-for="(item, index) in poi.info" :key="index">
+              <el-link
+                type="primary"
+                :href="item.link"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                {{ item.name }}
+              </el-link>
+            </div>
+          </el-descriptions-item>
+        </el-descriptions>
+      </el-popover>
+    </template>
   </div>
 </template>
 
@@ -364,7 +369,8 @@ export default {
       position: null,
       pageIndex: 1,
       pageSize: 20,
-      isPopover: false,
+
+      popPoiIndex: -1,
     };
   },
   async created() {
@@ -408,7 +414,8 @@ export default {
     };
     this.roadProgram.Transfer.leaveAt({ time: "08:30:00", date: "2022-03-01" });
     this.navMethodList = Object.keys(this.roadProgram);
-    await this.updateNewHouseData(true);
+    // 批量更新数据时使用，加载效率太低所以弃用
+    // await this.updateNewHouseData(true);
   },
   async mounted() {
     await loadPlugins(["AMap.AutoComplete", "AMap.PlaceSearch"]);
@@ -485,9 +492,30 @@ export default {
       this.total = 0;
       this.mode = "search";
     },
-    // closePopover() {
-    //   this.isPopover = false;
-    // },
+    async openPopover(tapMethod, index) {
+      // console.log(
+      //   this.$refs.infoWindow[index],
+      //   this.$refs.houseMarkers[index],
+      //   this.$refs.markerIcon[index],
+      // );
+      this.popPoiIndex = index;
+      await this.updateNewHousePoi(true, index);
+      // await this.updateNewHousePoi(false, index);
+      if (
+        ["", null, undefined].includes(
+          this.$refs.infoWindow[index].referenceElm
+        )
+      ) {
+        this.$refs.infoWindow[index].referenceElm =
+          this.$refs.markerIcon[index];
+        this.$refs.infoWindow[index].updatePopper();
+      }
+      this.$refs.infoWindow[index].doShow();
+      console.log(`click amap-marker:${index} with method ${tapMethod}`);
+    },
+    closePopover(index) {
+      this.$refs.infoWindow[index].doClose();
+    },
     /* 更新导航数据 */
     initNavQueue() {
       for (let index = 0; index < this.dataArray.length; index++) {
@@ -502,88 +530,164 @@ export default {
         }
       }
     },
-    async updateNewHouseData(isPush) {
+    async updateNewHousePoi(isPush, index) {
+      // 逐个更新展示数据
       if (isPush) {
         this.initNavQueue();
       }
 
-      for (let index = 0; index < this.dataArray.length; index++) {
-        let poi = this.rawNewHouse[index];
-        let pathTime = {};
-        let lenWork = this.workPlace.length;
-        for (let k = 0; k < lenWork; k++) {
-          let lenMethod = this.navMethodList.length;
-          let item = this.workPlace[k];
-          // push queue
-          if (isPush) {
-            for (let j = 0; j < lenMethod; j++) {
-              this.labelQueue.push(item.label);
-              this.labelRes[poi.id][item.id][this.navMethodList[j]] =
-                item.label;
-              await this.calPathTime(poi, item, this.navMethodList[j]);
-            }
-          } else {
-            // pop queue when watch the end
-            for (let j = 0; j < lenMethod; j++) {
-              if (
-                !Object.prototype.hasOwnProperty.call(
-                  pathTime,
-                  this.labelRes[poi.id][item.id][this.navMethodList[j]]
-                )
-              ) {
-                pathTime[
-                  this.labelRes[poi.id][item.id][this.navMethodList[j]]
-                ] = {
+      let poi = this.rawNewHouse[index];
+      let pathTime = {};
+      let lenWork = this.workPlace.length;
+      for (let k = 0; k < lenWork; k++) {
+        let lenMethod = this.navMethodList.length;
+        let item = this.workPlace[k];
+        // push queue
+        if (isPush) {
+          for (let j = 0; j < lenMethod; j++) {
+            this.labelQueue.push(item.label);
+            this.labelRes[poi.id][item.id][this.navMethodList[j]] = item.label;
+            await this.calPathTime(poi, item, this.navMethodList[j]);
+          }
+        } else {
+          // pop queue when watch the end
+          for (let j = 0; j < lenMethod; j++) {
+            if (
+              !Object.prototype.hasOwnProperty.call(
+                pathTime,
+                this.labelRes[poi.id][item.id][this.navMethodList[j]]
+              )
+            ) {
+              pathTime[this.labelRes[poi.id][item.id][this.navMethodList[j]]] =
+                {
                   label: this.labelRes[poi.id][item.id][this.navMethodList[j]],
                   poiHouse: Object.assign({}, poi),
                   poiWork: Object.assign({}, item),
                 };
-              }
-              // 要解析 routes / plans，取最短时间
-              pathTime[this.labelRes[poi.id][item.id][this.navMethodList[j]]][
-                this.navMethodList[j]
-              ] = this.getShortestPath(
-                this.navMethodList[j],
-                this.navRes[poi.id][item.id][this.navMethodList[j]]
-              );
-              // 要解析 taxi_cost，取最短时间
+            }
+            // 要解析 routes / plans，取最短时间
+            pathTime[this.labelRes[poi.id][item.id][this.navMethodList[j]]][
+              this.navMethodList[j]
+            ] = this.getShortestPath(
+              this.navMethodList[j],
+              this.navRes[poi.id][item.id][this.navMethodList[j]]
+            );
+            // 要解析 taxi_cost，取最短时间
+            if (
+              this.navRes[poi.id][item.id][this.navMethodList[j]] &&
+              this.navRes[poi.id][item.id][this.navMethodList[j]].taxi_cost
+            ) {
               if (
-                this.navRes[poi.id][item.id][this.navMethodList[j]] &&
-                this.navRes[poi.id][item.id][this.navMethodList[j]].taxi_cost
-              ) {
-                if (
-                  !Object.prototype.hasOwnProperty.call(
-                    pathTime,
-                    "taxi_cost"
-                  ) ||
-                  parseInt(
-                    pathTime[
-                      this.labelRes[poi.id][item.id][this.navMethodList[j]]
-                    ]["taxi_cost"]
-                  ) >
-                    this.navRes[poi.id][item.id][this.navMethodList[j]]
-                      .taxi_cost
-                ) {
-                  // 没有初始值 或 有初始值但是大于已知值
+                !Object.prototype.hasOwnProperty.call(pathTime, "taxi_cost") ||
+                parseInt(
                   pathTime[
                     this.labelRes[poi.id][item.id][this.navMethodList[j]]
-                  ]["taxi_cost"] =
-                    this.navRes[poi.id][item.id][this.navMethodList[j]]
-                      .taxi_cost + "元";
-                }
-              } else {
+                  ]["taxi_cost"]
+                ) >
+                  this.navRes[poi.id][item.id][this.navMethodList[j]].taxi_cost
+              ) {
+                // 没有初始值 或 有初始值但是大于已知值
                 pathTime[this.labelRes[poi.id][item.id][this.navMethodList[j]]][
                   "taxi_cost"
-                ] = 10000 + "元";
+                ] =
+                  this.navRes[poi.id][item.id][this.navMethodList[j]]
+                    .taxi_cost + "元";
               }
+            } else {
+              pathTime[this.labelRes[poi.id][item.id][this.navMethodList[j]]][
+                "taxi_cost"
+              ] = 10000 + "元";
             }
-            // console.log(pathTime);
           }
+          // console.log(pathTime);
         }
-        this.newHouse[index].pathTime = Object.values(pathTime);
-        // console.log(this.newHouse[index].id, this.newHouse[index].pathTime);
       }
+      this.newHouse[index].pathTime = Object.values(pathTime);
+      // console.log(this.newHouse[index].id, this.newHouse[index].pathTime);
     },
+    // 批量更新数据时使用，加载效率太低所以弃用
+    // async updateNewHouseData(isPush) {
+    //   if (isPush) {
+    //     this.initNavQueue();
+    //   }
+
+    //   for (let index = 0; index < this.dataArray.length; index++) {
+    //     let poi = this.rawNewHouse[index];
+    //     let pathTime = {};
+    //     let lenWork = this.workPlace.length;
+    //     for (let k = 0; k < lenWork; k++) {
+    //       let lenMethod = this.navMethodList.length;
+    //       let item = this.workPlace[k];
+    //       // push queue
+    //       if (isPush) {
+    //         for (let j = 0; j < lenMethod; j++) {
+    //           this.labelQueue.push(item.label);
+    //           this.labelRes[poi.id][item.id][this.navMethodList[j]] =
+    //             item.label;
+    //           await this.calPathTime(poi, item, this.navMethodList[j]);
+    //         }
+    //       } else {
+    //         // pop queue when watch the end
+    //         for (let j = 0; j < lenMethod; j++) {
+    //           if (
+    //             !Object.prototype.hasOwnProperty.call(
+    //               pathTime,
+    //               this.labelRes[poi.id][item.id][this.navMethodList[j]]
+    //             )
+    //           ) {
+    //             pathTime[
+    //               this.labelRes[poi.id][item.id][this.navMethodList[j]]
+    //             ] = {
+    //               label: this.labelRes[poi.id][item.id][this.navMethodList[j]],
+    //               poiHouse: Object.assign({}, poi),
+    //               poiWork: Object.assign({}, item),
+    //             };
+    //           }
+    //           // 要解析 routes / plans，取最短时间
+    //           pathTime[this.labelRes[poi.id][item.id][this.navMethodList[j]]][
+    //             this.navMethodList[j]
+    //           ] = this.getShortestPath(
+    //             this.navMethodList[j],
+    //             this.navRes[poi.id][item.id][this.navMethodList[j]]
+    //           );
+    //           // 要解析 taxi_cost，取最短时间
+    //           if (
+    //             this.navRes[poi.id][item.id][this.navMethodList[j]] &&
+    //             this.navRes[poi.id][item.id][this.navMethodList[j]].taxi_cost
+    //           ) {
+    //             if (
+    //               !Object.prototype.hasOwnProperty.call(
+    //                 pathTime,
+    //                 "taxi_cost"
+    //               ) ||
+    //               parseInt(
+    //                 pathTime[
+    //                   this.labelRes[poi.id][item.id][this.navMethodList[j]]
+    //                 ]["taxi_cost"]
+    //               ) >
+    //                 this.navRes[poi.id][item.id][this.navMethodList[j]]
+    //                   .taxi_cost
+    //             ) {
+    //               // 没有初始值 或 有初始值但是大于已知值
+    //               pathTime[
+    //                 this.labelRes[poi.id][item.id][this.navMethodList[j]]
+    //               ]["taxi_cost"] =
+    //                 this.navRes[poi.id][item.id][this.navMethodList[j]]
+    //                   .taxi_cost + "元";
+    //             }
+    //           } else {
+    //             pathTime[this.labelRes[poi.id][item.id][this.navMethodList[j]]][
+    //               "taxi_cost"
+    //             ] = 10000 + "元";
+    //           }
+    //         }
+    //         // console.log(pathTime);
+    //       }
+    //     }
+    //     this.newHouse[index].pathTime = Object.values(pathTime);
+    //     // console.log(this.newHouse[index].id, this.newHouse[index].pathTime);
+    //   }
+    // },
     async calPathTime(poi, workItem, key) {
       await this.roadProgram[key].search(
         new AMap.LngLat(poi.lng1, poi.lat2),
@@ -644,7 +748,10 @@ export default {
     navQueue: {
       async handler(newValue, oldValue) {
         if (this.navQueue.length == this.labelQueue.length) {
-          await this.updateNewHouseData(false);
+          await this.updateNewHousePoi(false, this.$data.popPoiIndex);
+          // this.$refs.infoWindow[this.$data.popPoiIndex].updatePopper();
+          // 批量更新数据时使用，加载效率太低所以弃用
+          // await this.updateNewHouseData(false);
           // this.$refs.infoWindow.$forceUpdate();
         }
       },
@@ -657,7 +764,8 @@ export default {
         this.$data.labelRes = {};
         this.$data.navQueue = [];
         this.$data.labelQueue = [];
-        await this.updateNewHouseData(true);
+        // 批量更新数据时使用，加载效率太低所以弃用
+        // await this.updateNewHouseData(true);
       },
       deep: true,
     },
@@ -668,7 +776,8 @@ export default {
         this.$data.labelRes = {};
         this.$data.navQueue = [];
         this.$data.labelQueue = [];
-        await this.updateNewHouseData(true);
+        // 批量更新数据时使用，加载效率太低所以弃用
+        // await this.updateNewHouseData(true);
       },
       deep: true,
     },
@@ -697,7 +806,8 @@ export default {
         } else {
           this.$data.workPlace.splice(0, 1);
         }
-        await this.updateNewHouseData(true);
+        // 批量更新数据时使用，加载效率太低所以弃用
+        // await this.updateNewHouseData(true);
       },
       deep: true,
     },
