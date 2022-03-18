@@ -52,6 +52,11 @@ const router = new VueRouter({
           },
         },
         {
+          path: 'test',
+          name: 'Test',
+          component: NewHouseView
+        },
+        {
           path: 'about',
           name: 'about',
           // route level code-splitting
