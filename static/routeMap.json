@@ -209,11 +209,15 @@
             "name": "同润欣汇名邸",
             "lng1": "121.660381",
             "lat2": "31.030826",
-            "price": "NaN",
-            "min_price": "NaN",
-            "max_price": "NaN",
-            "desc": "预计积分：\n浦东新场 388套精装高层+120套毛坯叠加\n2024\n90㎡三房高层\n预计x万\n16号新场",
+            "price": "4.8",
+            "min_price": "432",
+            "max_price": "680",
+            "desc": "预计积分：\n浦东新场 388套精装高层+120套毛坯叠加\n2024\n90㎡三房高层，110-140叠加\n预计4.8万\n16号新场",
             "info": [
+                {
+                    "name": "户型图、周边环境：匠人-03-20",
+                    "link": "https://mp.weixin.qq.com/s/HeLevRTZnqoWE2chVXCL_w"
+                },
                 {
                     "name": "户型图：地产热点-02-24",
                     "link": "https://mp.weixin.qq.com/s/HeLevRTZnqoWE2chVXCL_w"
@@ -416,8 +420,12 @@
             "price": "4",
             "min_price": "345",
             "max_price": "540",
-            "desc": "预计积分：\n奉贤北 x套\n期房\n86-135三到四房\n预计4万，前期3.8\n15号丰翔路",
+            "desc": "预计积分：\n奉贤北 肖塘 x套\n期房\n86-135三到四房\n预计4万，前期3.8\n5号丰萧唐150米",
             "info": [
+                {
+                    "name": "户型图、简介：地产热点-03-19",
+                    "link": "https://mp.weixin.qq.com/s/cvoLUuOhm6yDiNUO2MgebQ"
+                }
             ]
         }
     ]
