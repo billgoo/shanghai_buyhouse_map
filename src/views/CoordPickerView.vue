@@ -24,6 +24,6 @@ export default {
 <style lang="less" scoped>
 .example-custom-extension {
   width: 100%;
-  height: 600px;
+  height: 80vh;
 }
 </style>

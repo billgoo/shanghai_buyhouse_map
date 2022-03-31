@@ -16,11 +16,10 @@
           <i class="el-icon-map-location"></i>
           <span style="font-weight: bold">地图组件</span>
         </template>
-        <el-menu-item index="/coordPicker">坐标查询工具</el-menu-item>
+        <el-menu-item index="/coordPicker">地点搜索</el-menu-item>
         <el-menu-item index="/firstNew">第一批</el-menu-item>
         <el-menu-item index="/secondNew">第二批</el-menu-item>
         <el-menu-item index="/custom">预测（自定义）</el-menu-item>
-        <el-menu-item index="/rawAmap">地点搜索</el-menu-item>
         <el-menu-item index="/gaode">原生高德地图</el-menu-item>
         <el-menu-item index="/test">测试</el-menu-item>
       </el-submenu>

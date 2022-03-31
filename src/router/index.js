@@ -3,7 +3,6 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import CoordPickerView from '../views/CoordPickerView.vue'
 import NewHouseView from '../views/NewHouseView.vue'
-import RawAmapView from '../views/RawAmapView.vue'
 import ExternalView from '../views/ExternalView.vue'
 
 Vue.use(VueRouter)
@@ -37,11 +36,6 @@ const router = new VueRouter({
           path: 'custom',
           name: 'CustomTest',
           component: NewHouseView
-        },
-        {
-          path: 'rawAmap',
-          name: 'RawAmap',
-          component: RawAmapView
         },
         {
           path: 'gaode',
