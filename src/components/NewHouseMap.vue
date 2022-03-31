@@ -297,7 +297,7 @@
             </div>
           </el-descriptions-item>
           <el-descriptions-item label="描述" labelStyle="word-break: keep-all;">
-            <span class="my-break-line-span">{{ poi.desc }}</span>
+            <span v-html="poi.desc" class="my-break-line-span" />
           </el-descriptions-item>
           <el-descriptions-item
             label="相关信息"
