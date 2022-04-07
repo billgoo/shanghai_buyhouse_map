@@ -111,12 +111,12 @@
             "desc": "预计积分：<br />宝山上大大场 x套<br />期房<br />78-131㎡两到四房<br />预计x万<br />15号丰翔路300米",
             "info": [
                 {
-                    "name": "户型图、航拍：新房摇号-02-18",
+                    "name": "周边简介：新房摇号-02-18",
                     "link": "https://mp.weixin.qq.com/s/pdMI4NX4P4NxsUk_iFqEEg"
                 },
                 {
-                    "name": "户型图：地产热点-02-22",
-                    "link": "https://mp.weixin.qq.com/s/pegTdrpmk-6iCdgvCx9pBg"
+                    "name": "户型图：地产热点-04-06",
+                    "link": "https://mp.weixin.qq.com/s/RX0rjdJcRXYGtDLbLooK4g"
                 }
             ]
         },
@@ -128,10 +128,14 @@
             "price": "6.25",
             "min_price": "625",
             "max_price": "700",
-            "desc": "预计积分：<br />嘉定南翔 713套<br />期房<br />100㎡洋房&140-180㎡别墅<br />6.25万<br />11号马陆1.9公里",
+            "desc": "三星 优点：产品户型好，缺点：周围配套差<br />预计积分：不触发或低分<br />嘉定南翔 713套<br />期房<br />100㎡洋房&140-180㎡别墅<br />6.25万<br />11号马陆1.9公里",
             "info": [
                 {
-                    "name": "户型图：地产热点-02-22",
+                    "name": "户型图：学长-03-23",
+                    "link": "https://mp.weixin.qq.com/s?__biz=Mzg5NjQ5NTc5OQ==&mid=2247662986&idx=5&sn=bce0eca67686ac6af08933c71c456483&chksm=c00c0452f77b8d44d2a28292f094a2c9ae4385268956c1924fc1ad915c178ab1284a49fb522b&scene=21#wechat_redirect"
+                },
+                {
+                    "name": "简介：地产热点-02-22",
                     "link": "https://mp.weixin.qq.com/s/95RLSNdNI3_N7wDN-1wZrA"
                 }
             ]
@@ -255,6 +259,10 @@
                 {
                     "name": "户型图、航拍：地产热点-02-26",
                     "link": "https://mp.weixin.qq.com/s/58YDQHXxunS0Rmp2azXeng"
+                },
+                {
+                    "name": "航拍、周边：地产热点-04-05",
+                    "link": "https://mp.weixin.qq.com/s/rZA47CcCdwS23bMrLa5L7g"
                 }
             ]
         },
@@ -322,8 +330,12 @@
             "price": "6.4",
             "min_price": "580",
             "max_price": "700+",
-            "desc": "预计积分：触发<br />闵行颛桥 x套<br />期房<br />90-142三到四房<br />约6.4万，前期6.4<br />15号丰翔路",
+            "desc": "四星 户型配套华发地铁均优，改善优选<br />预计积分：60+<br />闵行颛桥 x套<br />期房<br />102三房<br />约6.4万，前期6.4<br />15号丰翔路",
             "info": [
+                {
+                    "name": "资料：学长-03-30",
+                    "link": "https://mp.weixin.qq.com/s?__biz=Mzg5NjQ5NTc5OQ==&mid=2247664300&idx=3&sn=78bde4f12bdfeb7c62028c1b96a53b0b&chksm=c00c3b74f77bb262a9d9d00603463947b03d95f920311053b05e3c0e0fcd8febe14c15020ef5&scene=21#wechat_redirect"
+                }
             ]
         },
         {
@@ -546,8 +558,24 @@
             "price": "4.8",
             "min_price": "500",
             "max_price": "700+",
-            "desc": "预计积分：未知test<br />松江九亭 200套<br />期房<br />104-178㎡高层<br />预计4.8万<br />9号九亭1.5公里",
+            "desc": "预计积分：未知<br />松江九亭 200套<br />期房<br />104-178㎡高层<br />预计4.8万<br />9号九亭1.5公里",
             "info": [
+            ]
+        },
+        {
+            "id": "35",
+            "name": "龙湖南山",
+            "lng1": "121.313791",
+            "lat2": "31.268276",
+            "price": "5.75",
+            "min_price": "550",
+            "max_price": "800",
+            "desc": "预计积分：60+<br />嘉定江桥 416套<br />期房<br />104-178㎡高层<br />预计5.75万<br />14号线&嘉闵线（在建）乐秀路站x公里",
+            "info": [
+                {
+                    "name": "简介：新房摇号-04-06",
+                    "link": "https://mp.weixin.qq.com/s/9kDGEFgTHgCr9ELsGJbH-w"
+                }
             ]
         }
     ]
