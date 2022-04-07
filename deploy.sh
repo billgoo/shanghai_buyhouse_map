@@ -8,7 +8,7 @@ set -e
 # 构建
 rm -r -f dist/
 echo "[INFO] ---------- start build ----------"
-# npm install
+npm install
 npm run build
 # 移动静态文件
 cp -r static/ dist/static/
