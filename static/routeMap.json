@@ -75,11 +75,15 @@
             "price": "4",
             "min_price": "345",
             "max_price": "540",
-            "desc": "预计积分：不触发<br />奉贤北 肖塘 80套135，靠河景观房<br />期房2023年12月<br />86-135三到四房，135是毛坯<br />预计4万，前期3.8<br />5号丰萧唐150米",
+            "desc": "预计积分：不触发<br />奉贤北 肖塘 80套135，靠河景观房，客厅面宽3.4米，客厅双阳台<br />期房2023年12月<br />86-135三到四房，135是毛坯<br />预计4万，前期3.8<br />5号丰萧唐150米",
             "info": [
                 {
                     "name": "户型图、简介：地产热点-03-19",
                     "link": "https://mp.weixin.qq.com/s/cvoLUuOhm6yDiNUO2MgebQ"
+                },
+                {
+                    "name": "详细资料：小胖看房-03-10",
+                    "link": "https://mp.weixin.qq.com/s?__biz=MzUwOTY1NzYyMg==&mid=2247747116&idx=7&sn=b5b51fd2221010c8fba4d56219321856&chksm=f9039155ce741843e802b93e996510487f9ad016c146c30d3fc1647ff58af01cc6bb78a1edc6&scene=21#wechat_redirect"
                 }
             ]
         },
@@ -125,6 +129,10 @@
             "max_price": "650",
             "desc": "预计积分：60<br />青浦徐泾 1779套<br />期房 精装<br />86-104㎡高层<br />6万<br />17号线蟠龙路站x公里",
             "info": [
+                {
+                    "name": "户型图、简介：地产-04-18",
+                    "link": "https://mp.weixin.qq.com/s/4AmhH8nErXY3JcT8_11Azg"
+                }
             ]
         },
         {
