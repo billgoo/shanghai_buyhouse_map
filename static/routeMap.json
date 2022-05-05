@@ -127,11 +127,15 @@
             "price": "6",
             "min_price": "620",
             "max_price": "650",
-            "desc": "预计积分：60<br />青浦徐泾 1779套<br />期房 精装<br />86-104㎡高层<br />6万<br />17号线蟠龙路站x公里",
+            "desc": "预计积分：60<br />青浦徐泾 1779套<br />期房 精装<br />86、93、104㎡高层<br />6万<br />17号线蟠龙路站x公里",
             "info": [
                 {
                     "name": "户型图、简介：地产-04-18",
                     "link": "https://mp.weixin.qq.com/s/4AmhH8nErXY3JcT8_11Azg"
+                },
+                {
+                    "name": "户型图、配套：新房-04-30",
+                    "link": "https://mp.weixin.qq.com/s/kAbV_BplR1urXkc7MhfSnA"
                 }
             ]
         },
