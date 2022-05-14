@@ -424,6 +424,9 @@ export default {
     });
     this.ac = new AMap.AutoComplete();
   },
+  async destroyed() {
+    Object.values(this.navProgram).forEach((navMethod) => navMethod.clear());
+  },
   methods: {
     async search(clear = false) {
       this.hover = null;
@@ -766,6 +769,7 @@ export default {
         this.$data.labelQueue = [];
         // 批量更新数据时使用，加载效率太低所以弃用
         // await this.updateNewHouseData(true);
+        Object.values(this.navProgram).forEach((navMethod) => navMethod.clear());
       },
       deep: true,
     },
